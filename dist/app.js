@@ -1,6 +1,9 @@
 "use strict";
-let userInput;
-const generateError = (message, code) => {
-    throw { message: message, errorCode: code };
+// interface Person {
+//   name: string;
+//   age: number;
+const el = {
+    name: 'oshoke',
+    privileges: ['create-server'],
+    startDate: new Date(),
 };
-generateError('an error occured', 484);
