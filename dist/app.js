@@ -110,7 +110,18 @@ console.log(fetchedUserData.job.title);
 */
 // GENERIC TYPES
 //const names = ['oshoke', 'oyati'];
-// function merge<T, U>(objA: T, objB: U) {
-//   return Object.assign(objA, objB);
-// }
-// console.log(merge({ name: 'shokes' }, { name: 'muski' }));
+function merge(objA, objB) {
+    return Object.assign(objA, objB);
+}
+console.log(merge({ name: 'shokes' }, { name: 'muski' }));
+const countAndPrint = (element) => {
+    let desc = 'got no value';
+    if (element.length === 1) {
+        desc = 'got ' + 1 + 'element';
+    }
+    else if (element.length > 1) {
+        desc = 'got ' + element.length + 'elements';
+    }
+    return [element, desc];
+};
+console.log(countAndPrint('hi there!'));

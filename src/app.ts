@@ -115,8 +115,24 @@ console.log(fetchedUserData.job.title);
 // GENERIC TYPES
 //const names = ['oshoke', 'oyati'];
 
-// function merge<T, U>(objA: T, objB: U) {
-//   return Object.assign(objA, objB);
-// }
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
 
-// console.log(merge({ name: 'shokes' }, { name: 'muski' }));
+console.log(merge({ name: 'shokes' }, { name: 'muski' }));
+
+interface Lengthy {
+  length: number;
+}
+
+const countAndPrint = <T extends Lengthy>(element: T): [T, string] => {
+  let desc = 'got no value';
+  if (element.length === 1) {
+    desc = 'got ' + 1 + 'element';
+  } else if (element.length > 1) {
+    desc = 'got ' + element.length + 'elements';
+  }
+  return [element, desc];
+};
+
+console.log(countAndPrint('hi there!'));
