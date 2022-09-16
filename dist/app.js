@@ -2,6 +2,12 @@
 // interface Person {
 //   name: string;
 //   age: number;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 //   greet(phrase: string): void;
 // }
 // let user1: Person;
@@ -107,21 +113,51 @@ const fetchedUserData = {
 };
 
 console.log(fetchedUserData.job.title);
-*/
+
+
 // GENERIC TYPES
 //const names = ['oshoke', 'oyati'];
-function merge(objA, objB) {
-    return Object.assign(objA, objB);
+
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
 }
+
 console.log(merge({ name: 'shokes' }, { name: 'muski' }));
-const countAndPrint = (element) => {
-    let desc = 'got no value';
-    if (element.length === 1) {
-        desc = 'got ' + 1 + 'element';
-    }
-    else if (element.length > 1) {
-        desc = 'got ' + element.length + 'elements';
-    }
-    return [element, desc];
+
+interface Lengthy {
+  length: number;
+}
+
+const countAndPrint = <T extends Lengthy>(element: T): [T, string] => {
+  let desc = 'got no value';
+  if (element.length === 1) {
+    desc = 'got ' + 1 + 'element';
+  } else if (element.length > 1) {
+    desc = 'got ' + element.length + 'elements';
+  }
+  return [element, desc];
 };
+
 console.log(countAndPrint('hi there!'));
+*/
+// DECORATORS - meta programming
+const Logger = () => {
+    return function (constructor) {
+        console.log('logging');
+        console.log(constructor);
+    };
+};
+function withTemplate(template, hookId) {
+    return function (constructor) { };
+}
+let Person = class Person {
+    constructor() {
+        this.name = 'Max';
+        console.log('creaing person object');
+    }
+};
+Person = __decorate([
+    Logger()
+], Person);
+const pers = new Person();
+console.log(pers);

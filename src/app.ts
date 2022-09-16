@@ -110,7 +110,7 @@ const fetchedUserData = {
 };
 
 console.log(fetchedUserData.job.title);
-*/
+
 
 // GENERIC TYPES
 //const names = ['oshoke', 'oyati'];
@@ -136,3 +136,30 @@ const countAndPrint = <T extends Lengthy>(element: T): [T, string] => {
 };
 
 console.log(countAndPrint('hi there!'));
+*/
+
+// DECORATORS - meta programming
+
+const Logger = () => {
+  return function (constructor: Function) {
+    console.log('logging');
+    console.log(constructor);
+  };
+};
+
+function withTemplate(template: string, hookId: string) {
+  return function (constructor: Function) {};
+}
+
+@Logger()
+class Person {
+  name = 'Max';
+
+  constructor() {
+    console.log('creaing person object');
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
